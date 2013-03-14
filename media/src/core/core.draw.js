@@ -309,7 +309,7 @@ function _fnDrawHead( oSettings, aoSource, bIncludeHidden )
  */
 function _fnDraw( oSettings )
 {
-	/* Provide a pre-callback function which can be used to cancel the draw is false is returned */
+	/* Provide a pre-callback function which can be used to cancel the draw if false is returned */
 	var aPreDraw = _fnCallbackFire( oSettings, 'aoPreDrawCallback', 'preDraw', [oSettings] );
 	if ( $.inArray( false, aPreDraw ) !== -1 )
 	{
@@ -793,7 +793,6 @@ function _fnGetUniqueThs ( oSettings, nHeader, aLayout )
 			}
 		}
 	}
-	
+
 	return aReturn;
 }
-
