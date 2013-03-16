@@ -120,9 +120,19 @@ $.extend( DataTable.ext.oPagination, {
 			var oLang = oSettings.oLanguage.oPaginate;
 			var oClasses = oSettings.oClasses;
 			var fnClickHandler = function ( e ) {
+				var iOldDisplayStart = oSettings._iDisplayStart;
+				var bDrawOccured = false;
+				$(oSettings.oInstance).on('draw.DTfull_numbers', function() {
+					bDrawOccured = true;
+				});
 				if ( oSettings.oApi._fnPageChange( oSettings, e.data.action ) )
 				{
 					fnCallbackDraw( oSettings );
+				}
+				$(oSettings.oInstance).off('draw.DTfull_numbers');
+				// if the draw did not happen reset the _iDisplayStart to its original value
+				if (!bDrawOccured) {
+					oSettings._iDisplayStart = iOldDisplayStart;
 				}
 			};
 
